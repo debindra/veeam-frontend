@@ -1,0 +1,60 @@
+{
+  "name": "baas_frontend",
+  "version": "1.0.0",
+  "description": "BAAS System",
+  "author": "Deb",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "dependencies": {
+    "@antv/data-set": "^0.11.8",
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.12.0",
+    "ant-design-vue": "^1.6.3",
+    "apexcharts": "^3.23.1",
+    "cookieparser": "^0.1.0",
+    "js-cookie": "^2.2.0",
+    "leaflet": "^1.5.1",
+    "leaflet-boundary-canvas": "^1.0.0",
+    "lodash": "^4.17.19",
+    "mime-types": "^2.1.27",
+    "nuxt": "^2.13.3",
+    "nuxt-moment": "^1.0.5",
+    "papaparse": "^5.3.0",
+    "path-to-regexp": "^5.0.0",
+    "v-idle": "^0.2.0",
+    "viser-vue": "^2.4.8",
+    "vue-choropleth": "^0.3.1",
+    "vue-gates": "^2.1.0",
+    "vue-html2canvas": "0.0.4",
+    "vue-moment": "^4.1.0",
+    "vue-simple-calendar": "^5.0.0",
+    "vue-swatches": "^2.1.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/moment": "^1.6.1",
+    "babel-plugin-import": "^1.13.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "node-sass": "^4.14.1",
+    "prettier": "^1.16.4",
+    "pretty-quick": "^3.0.2",
+    "sass": "^1.32.5",
+    "sass-loader": "^8.0.2",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "webpack-chain": "^6.5.0"
+  }
+}

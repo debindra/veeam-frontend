@@ -1,0 +1,453 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap");
+
+$primary: #005aaa;
+
+@font-face {
+  font-family: "Century Gothic";
+  src: url("../fonts/CenturyGothic.ttf");
+}
+@font-face {
+  font-family: Prototype;
+  src: url("../fonts/Prototype.ttf");
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #424242;
+}
+
+.user-card {
+}
+
+.container {
+  padding: 0px 10px 0px 10px;
+}
+
+.main {
+  padding-top: 20px;
+}
+
+.chart {
+  background: #ffffff;
+  // border: 1px solid #dfdede;
+  box-sizing: border-box;
+  padding: 10px;
+
+  // overflow-x: scroll;
+  .title {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+}
+
+// .user-card {
+// }
+.shadow-card {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  background-color: white;
+}
+
+p {
+  color: #3a3a3a;
+}
+
+.left,
+.right {
+  display: inline-block;
+}
+
+.right {
+  width: calc(100% - 50px);
+}
+
+.left {
+  float: left;
+  width: 50px;
+}
+
+.right {
+  float: right;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.font-blue {
+  color: $primary;
+}
+
+.font-white {
+  color: #fff;
+}
+
+.float-right {
+  float: right;
+}
+
+.filled-light-button {
+  background-color: #d7edff !important;
+  border: 1px solid #d7edff !important;
+  color: $primary !important;
+  text-transform: uppercase;
+}
+
+.main-title {
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.main-title-text {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #5f5f5f;
+}
+
+.ant-menu-item,
+.ant-menu-submenu-title {
+  text-transform: uppercase;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 20px;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.title-icon {
+  color: $primary;
+  margin-right: 10px;
+}
+
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: $primary;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 999;
+}
+
+.aliceblue-bg {
+  background-color: aliceblue;
+}
+
+.padding-15 {
+  padding: 15px;
+}
+
+.border-radius-10 {
+  border-radius: 10px;
+}
+
+.form-border {
+  border: 1px solid #ececec;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.ant-form label {
+  font-weight: 400;
+}
+
+.ant-form-item-label label {
+  color: rgb(97, 97, 97);
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.whitesmoke-bg {
+  background-color: aliceblue;
+}
+
+.dashboard {
+  .ant-card-bordered {
+    border: 1px solid #9ad6ff;
+  }
+
+  .ant-statistic-title {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #323942;
+  }
+}
+
+.padding-30 {
+  padding: 0 30px;
+}
+
+.indicator-header {
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 20px;
+}
+
+.indicator-title {
+  font-size: 19px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.indicator-btns {
+  margin: auto;
+  text-align: center;
+  margin-top: -10px;
+}
+
+.indicator-info {
+  color: grey;
+  font-size: 15px;
+}
+
+.indicator-date {
+  float: right;
+}
+
+.border-card {
+  border: 1px solid #e2e2e2;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+
+  p {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+}
+
+.ant-btn-primary {
+  color: #fff;
+  background-color: $primary;
+  border-color: $primary;
+  text-shadow: none;
+  box-shadow: none;
+  text-transform: uppercase;
+}
+
+.ant-table-thead {
+  background-color: #eef5f5;
+}
+
+.ant-table-small > .ant-table-content > .ant-table-body {
+  margin: 0;
+}
+
+.border-card {
+  .title {
+    margin: 0px;
+    padding: 0px;
+    font-weight: 500;
+    color: #000000;
+    text-transform: uppercase;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 20px;
+  }
+}
+
+.ant-table-thead > tr > th {
+  color: #fff;
+}
+
+.ant-table-thead {
+  background-color: $primary;
+  color: #fff;
+}
+
+.width-100 {
+  width: 100% !important;
+}
+
+.page-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-family: Roboto;
+}
+
+.card-header {
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  font-family: Roboto;
+
+  .card-title {
+    span {
+      text-transform: uppercase;
+      font-size: 17px;
+      font-weight: 500;
+      color: #000;
+    }
+  }
+}
+
+.ant-table-thead > tr > th {
+  background-color: #f7f7f7;
+  color: $primary;
+}
+
+.ant-table-tbody > tr > td {
+  font-size: 14px;
+}
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  padding: 8px 16px;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #eef5f5;
+}
+
+.ant-menu-item-selected,
+.ant-menu-submenu-selected {
+  color: $primary;
+}
+
+.ant-menu-item:hover,
+.ant-menu-item-active,
+.ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+.ant-menu-submenu-active,
+.ant-menu-submenu-title:hover {
+  color: $primary;
+  background-color: #eef5f5;
+}
+
+.margin-0 {
+  margin-bottom: 0;
+}
+
+.fixed-width {
+  max-width: 1200px;
+  margin: 0 auto;
+  // background-color: #fff;
+}
+
+.public-page-title {
+  font-size: 25px;
+  font-family: Roboto;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.primary-green {
+  background-color: $primary;
+}
+
+.font-green {
+  color: $primary !important;
+}
+
+.accent-button {
+  background-color: #ea6405;
+  border-color: #ea6405;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+a {
+  color: $primary !important;
+}
+
+.ant-table {
+  overflow: scroll;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.no-border-radius {
+  border-radius: 0 !important;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.ant-calendar-month-panel-selected-cell .ant-calendar-month-panel-month {
+  color: #fff;
+  background: #e8f3fd;
+}
+
+.horizontal-nav {
+  margin-bottom: 20px;
+}
+
+.horizontal-menu {
+  background-color: #fff;
+  padding: 20px;
+  z-index: 99999;
+  border-bottom: 1px solid #005aaa;
+}
+
+.grey-bg {
+  background-color: #f7fafd;
+}
+
+.inner-padding {
+  padding: 0 40px;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.info-box {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  box-sizing: border-box;
+  box-shadow: 3px 4px 15px #e8e8e9;
+  padding: 20px 15px;
+  transition: 1s;
+
+  p {
+    margin-bottom: 5px;
+  }
+
+  .info-title {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .info-count {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: Roboto;
+    color: $primary;
+  }
+
+  .info-caption {
+    font-size: 14px;
+  }
+}
