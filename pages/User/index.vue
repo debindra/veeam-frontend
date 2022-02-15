@@ -1,7 +1,6 @@
 <template>
   <div class="user-list">
     <div class="page-title">Users</div>
-    <permission-alert v-if="showPermissionAlert"/>
 
     <div class="card">
       <div class="card-header">
@@ -109,12 +108,6 @@ export default {
     };
   },
   computed: {
-    showPermissionAlert() {
-      if (this.disableUserAdd || this.disableSwitch) {
-        return true;
-      }
-      return false;
-    }
   },
   watch: {},
   mounted() {}

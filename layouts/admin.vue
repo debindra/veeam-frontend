@@ -8,7 +8,7 @@
       <div class="logo">
         BAAS System
       </div>
-      <a-menu
+        <a-menu
         theme="light"
         :defaultSelectedKeys="[$route.name]"
         @click="redirectToMenu"
@@ -145,79 +145,50 @@ export default {
       logoutVisible: false,
       menu: [
         {
-          id: 1,
           title: "DASHBOARD",
           icon: "home",
           path: "/dashboard",
-          code: "DASHBOARD",
-          order: 1,
           subModules: []
         },
-        {
-          id: 2,
-          title: "SYSTEM MANAGEMENT",
-          icon: "setting",
-          path: "/system",
-          code: "SYSTEM_MANAGEMENT",
-          order: 2,
-          subModules: [
+
             {
-              id: 21,
               title: "AGENTS",
-              icon: null,
+              icon: "team",
               path: "/system/agents",
-              code: "SYSTEN_MANAGEMENT_AGENTS",
-              order: 1,
               subModules: []
             },
             {
-              id: 22,
-              title: "ALARAMS",
-              icon: null,
-              path: "/system/alarams",
-              code: "SYSTEM_MANAGEMENT_ALARAMS",
-              order: 2,
-              subModules: []
+              title: "ALARMS",
+              icon: "clock-circle",
+              path: "/system/alarms",
+              subModules:  [
+                  {
+                  title: "TEMPLATES",
+                  icon: null,
+                  path: "/system/alarms/templates",
+                  subModules: []
+                },
+                 {
+                  title: "ACTIVE",
+                  icon: null,
+                  path: "/system/alarms/active",
+                  subModules: []
+                }
+                ]
             },
             {
-              id: 23,
+
               title: "POLICIES",
-              icon: null,
+              icon: "form",
               path: "/system/policies",
-              code: "SYSTEM_MANAGEMENT_POLICIES",
-              order: 3,
               subModules: []
             },
             {
-              id: 24,
               title: "JOBS",
-              icon: null,
+              icon: "reload",
               path: "/system/jobs",
-              code: "SYSTEM_MANAGEMENT_JOBS",
-              order: 3,
               subModules: []
             }
-          ]
-        },
-        {
-          id: 3,
-          title: "ADMIMINISTRATOR",
-          icon: "user",
-          path: "/user",
-          code: "USER_MANAGEMENT",
-          order: 2,
-          subModules: [
-            {
-              id: 31,
-              title: "Users",
-              icon: null,
-              path: "/user",
-              code: "USER_MANAGEMENT_LIST",
-              order: 1,
-              subModules: []
-            }
-          ]
-        }
       ]
     };
   },
@@ -233,10 +204,7 @@ export default {
       });
       this.logout();
     },
-    onremind(time) {
-      // alert seconds remaining to 00:00
-      // alert("Logging out in " + time);
-    },
+
     redirectToMenu({ key }) {
       this.$router.push(key);
     },
@@ -273,7 +241,6 @@ export default {
     async getMenu() {
       let menu = await this.$store.getters["user/getMenuList"];
       this.menu = menu;
-      // console.log("menus", menu);
     },
     viewAll() {
       this.notificationDrawer = false;
