@@ -6,7 +6,7 @@
         <a-row type="flex" justify="space-between">
           <a-col>
             <div class="card-title">
-              <span>Alarm Active</span>
+              <span>Backup Server Repository</span>
             </div>
           </a-col>
 
@@ -14,9 +14,9 @@
       </div>
 
       <a-table
-        :columns="active_columns"
+        :columns="server_columns"
         :data-source="actives"
-        rowKey="alarmTemplateUid"
+        rowKey="instanceUid"
         :loading="loading"
         :pagination="{
           defaultPageSize: 10,
@@ -27,74 +27,33 @@
         }"
       >
 
-    
+        <span slot="capacity" slot-scope="text, record">
+            {{record.freeSpace}} available of  {{record.capacity}}
 
-        <span slot="object" slot-scope="text, record">
-         <table>
-
-         <tbody>
-         <tr>
-          <td> Type: </td>
-          <td> {{record.object.type}} </td>
-         </tr>
-
-          <tr>
-          <td> Computer: </td>
-          <td> {{record.object.computerName}} </td>
-         </tr>
-
-
-          <tr>
-          <td> Object: </td>
-          <td> {{record.object.objectName}} </td>
-         </tr>
-         
-         </tbody>
-
-         </table>
-   
+        </span>
+        <span slot="status" slot-scope="text, record">
+             <a-tag color="#87d068">
+                {{record.status}}
+            </a-tag>
         </span>
 
-        <span slot="lastActivation" slot-scope="text, record">
-         <table>
+        <span slot="isCloud" slot-scope="text, record">
+                <a-icon type="check-circle" theme="twoTone" two-tone-color="#52c41a" v-if="record.isCloud" />
+                <a-icon type="close-circle" theme="twoTone" two-tone-color="#eb2f96" v-else />
 
-         <tbody>
-         <tr>
-          <td> Time: </td>
-          <td> {{record.lastActivation.time}} </td>
-         </tr>
-
-          <tr>
-          <td> Status: </td>
-          <td> {{record.lastActivation.status}} </td>
-         </tr>
-
-
-          <tr>
-          <td> Message: </td>
-          <td> {{record.lastActivation.message}} </td>
-         </tr>
-
-         <tr>
-          <td> Remark: </td>
-          <td> {{record.lastActivation.remark}} </td>
-         </tr>
-         
-         </tbody>
-         </table>
         </span>
 
         <span slot="action" slot-scope="text, record">
-            <a href="javascript:;" @click="() => showResolveModal(record.instanceUid)">resolve</a> 
+            <!-- <a href="javascript:;" @click="() => showResolveModal(record.instanceUid)">resolve</a> 
             <a-divider type="vertical" />
             <a href="javascript:;" @click="() => showAcknowledgeModal(record.instanceUid)">acknowledge</a> 
-            <a-divider type="vertical" />
+            <a-divider type="vertical" /> -->
 
             <a-popconfirm
-              title="Are you sure delete this active?"
+              title="Are you sure delete this repository?"
               ok-text="Yes"
               cancel-text="No"
-              @confirm="deleteActive(record.instanceUid)"
+              @confirm="deletePolicy(record.instanceUid)"
               @cancel="cancel"
             >
                <a href="javascript:;" type="danger" danger>delete</a>
@@ -184,28 +143,60 @@
 <script>
 import moment from "moment";
 
-const active_columns = [
+const server_columns = [
 
   {
-    dataIndex: "repeatCount",
-    key: "repeatCount",
-    title: "REPEAT",
-    scopedSlots: { customRender: "repeatCount" }
+    dataIndex: "name",
+    key: "name",
+    title: "NAME",
+    scopedSlots: { customRender: "name" }
   },
 
   {
-    dataIndex: "object",
-    key: "object",
-    title: "OBJECT",
-    scopedSlots: { customRender: "object" }
+    dataIndex: "capacity",
+    key: "capacity",
+    title: "CAPACITY",
+    scopedSlots: { customRender: "capacity" }
+  },
+
+ 
+  {
+    dataIndex: "type",
+    key: "type",
+    title: "TYPE",
+    scopedSlots: { customRender: "type" }
   },
  
   {
-    dataIndex: "lastActivation",
-    key: "lastActivation",
-    title: "LAST ACTIVATION",
-    scopedSlots: { customRender: "lastActivation" }
-  },
+    dataIndex: "path",
+    key: "path",
+    title: "PATH",
+    scopedSlots: { customRender: "path" }
+  }
+  ,
+
+  {
+    dataIndex: "hostName",
+    key: "hostName",
+    title: "HOST NAME",
+    scopedSlots: { customRender: "hostName" }
+  }
+ ,
+
+  {
+    dataIndex: "status",
+    key: "status",
+    title: "STATUS",
+    scopedSlots: { customRender: "status" }
+  } ,
+
+  {
+    dataIndex: "isCloud",
+    key: "isCloud",
+    title: "IS CLOUD",
+    scopedSlots: { customRender: "isCloud" }
+  }
+  ,
   {
     title: "ACTIONS",
     key: "action",
@@ -232,7 +223,7 @@ export default {
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },
       actives: [],
-      active_columns,
+      server_columns,
    
       visibleResolveModal: false,
       resolveForm: {alarmUid:null,comment:null, resolveOnClients: null},
@@ -266,10 +257,8 @@ export default {
     },
 
     async fetchTableData(params) {
-
       this.loading = true;
-      let res = await this.$alarm.getAlarmActive(params);
-
+      let res = await this.$server.getServerRepository(params);
       if (res.data.length>0) {
         this.actives = res.data;
         this.loading = false;
@@ -284,11 +273,11 @@ export default {
       this.showEventModal = false;
     },
 
-    deleteActive(ararmUid){
-      this.$alarm.deleteActive(ararmUid).then(response => {
+    deletePolicy(ararmUid){
+      this.$alarm.deletePolicy(ararmUid).then(response => {
 
         if(!response.errors){
-          this.$message.success("Active successfully deleted.");
+          this.$message.success("Policy successfully deleted.");
           this.fetchTableData();
         }else{
           this.$message.error('Something went wrong.');

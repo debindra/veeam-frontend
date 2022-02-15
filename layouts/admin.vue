@@ -150,6 +150,19 @@ export default {
           path: "/dashboard",
           subModules: []
         },
+        {
+              title: "COMPANY",
+              icon: "bank",
+              path: "/organizations/companies",
+              subModules: []
+            },
+            {
+              title: "SERVERS",
+              icon: "cloud-server",
+              path: "/system/servers",
+              subModules: []
+            }
+            ,  
 
             {
               title: "AGENTS",
@@ -189,6 +202,8 @@ export default {
               path: "/system/jobs",
               subModules: []
             }
+          
+            
       ]
     };
   },

@@ -6,17 +6,22 @@
         <a-row type="flex" justify="space-between">
           <a-col>
             <div class="card-title">
-              <span>Alarm Active</span>
+              <span>Backup Servers</span>
             </div>
+          </a-col>
+
+          <a-col>
+            <a-button @click="redirect('/system/servers/proxies')" type="primary">Proxies</a-button>
+            <a-button @click="redirect('/system/servers/repositories')" type="primary">Repositories</a-button>
           </a-col>
 
         </a-row>
       </div>
 
       <a-table
-        :columns="active_columns"
+        :columns="server_columns"
         :data-source="actives"
-        rowKey="alarmTemplateUid"
+        rowKey="instanceUid"
         :loading="loading"
         :pagination="{
           defaultPageSize: 10,
@@ -27,74 +32,23 @@
         }"
       >
 
-    
-
-        <span slot="object" slot-scope="text, record">
-         <table>
-
-         <tbody>
-         <tr>
-          <td> Type: </td>
-          <td> {{record.object.type}} </td>
-         </tr>
-
-          <tr>
-          <td> Computer: </td>
-          <td> {{record.object.computerName}} </td>
-         </tr>
-
-
-          <tr>
-          <td> Object: </td>
-          <td> {{record.object.objectName}} </td>
-         </tr>
-         
-         </tbody>
-
-         </table>
-   
-        </span>
-
-        <span slot="lastActivation" slot-scope="text, record">
-         <table>
-
-         <tbody>
-         <tr>
-          <td> Time: </td>
-          <td> {{record.lastActivation.time}} </td>
-         </tr>
-
-          <tr>
-          <td> Status: </td>
-          <td> {{record.lastActivation.status}} </td>
-         </tr>
-
-
-          <tr>
-          <td> Message: </td>
-          <td> {{record.lastActivation.message}} </td>
-         </tr>
-
-         <tr>
-          <td> Remark: </td>
-          <td> {{record.lastActivation.remark}} </td>
-         </tr>
-         
-         </tbody>
-         </table>
+        <span slot="status" slot-scope="text, record">
+             <a-tag color="#87d068">
+                {{record.status}}
+            </a-tag>
         </span>
 
         <span slot="action" slot-scope="text, record">
-            <a href="javascript:;" @click="() => showResolveModal(record.instanceUid)">resolve</a> 
+            <!-- <a href="javascript:;" @click="() => showResolveModal(record.instanceUid)">resolve</a> 
             <a-divider type="vertical" />
             <a href="javascript:;" @click="() => showAcknowledgeModal(record.instanceUid)">acknowledge</a> 
-            <a-divider type="vertical" />
+            <a-divider type="vertical" /> -->
 
             <a-popconfirm
-              title="Are you sure delete this active?"
+              title="Are you sure delete this Server?"
               ok-text="Yes"
               cancel-text="No"
-              @confirm="deleteActive(record.instanceUid)"
+              @confirm="deletePolicy(record.instanceUid)"
               @cancel="cancel"
             >
                <a href="javascript:;" type="danger" danger>delete</a>
@@ -184,28 +138,46 @@
 <script>
 import moment from "moment";
 
-const active_columns = [
+const server_columns = [
 
   {
-    dataIndex: "repeatCount",
-    key: "repeatCount",
-    title: "REPEAT",
-    scopedSlots: { customRender: "repeatCount" }
+    dataIndex: "name",
+    key: "name",
+    title: "NAME",
+    scopedSlots: { customRender: "name" }
   },
 
   {
-    dataIndex: "object",
-    key: "object",
-    title: "OBJECT",
-    scopedSlots: { customRender: "object" }
+    dataIndex: "version",
+    key: "version",
+    title: "VERSION",
+    scopedSlots: { customRender: "version" }
+  },
+
+ 
+  {
+    dataIndex: "displayVersion",
+    key: "displayVersion",
+    title: "DISPLAY VERSION",
+    scopedSlots: { customRender: "displayVersion" }
   },
  
   {
-    dataIndex: "lastActivation",
-    key: "lastActivation",
-    title: "LAST ACTIVATION",
-    scopedSlots: { customRender: "lastActivation" }
-  },
+    dataIndex: "backupServerRoleType",
+    key: "backupServerRoleType",
+    title: "ROLE TYPE",
+    scopedSlots: { customRender: "backupServerRoleType" }
+  }
+  ,
+
+  {
+    dataIndex: "status",
+    key: "status",
+    title: "STATUS",
+    scopedSlots: { customRender: "status" }
+  }
+
+  ,
   {
     title: "ACTIONS",
     key: "action",
@@ -232,7 +204,7 @@ export default {
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },
       actives: [],
-      active_columns,
+      server_columns,
    
       visibleResolveModal: false,
       resolveForm: {alarmUid:null,comment:null, resolveOnClients: null},
@@ -244,6 +216,9 @@ export default {
     };
   },
   methods: {
+     redirect(route) {
+      this.$router.push(route);
+    },
     showResolveModal(modal1Visible){
     
       if(typeof modal1Visible != "boolean"){
@@ -266,10 +241,8 @@ export default {
     },
 
     async fetchTableData(params) {
-
       this.loading = true;
-      let res = await this.$alarm.getAlarmActive(params);
-
+      let res = await this.$server.getServer(params);
       if (res.data.length>0) {
         this.actives = res.data;
         this.loading = false;
@@ -284,11 +257,11 @@ export default {
       this.showEventModal = false;
     },
 
-    deleteActive(ararmUid){
-      this.$alarm.deleteActive(ararmUid).then(response => {
+    deletePolicy(ararmUid){
+      this.$alarm.deletePolicy(ararmUid).then(response => {
 
         if(!response.errors){
-          this.$message.success("Active successfully deleted.");
+          this.$message.success("Policy successfully deleted.");
           this.fetchTableData();
         }else{
           this.$message.error('Something went wrong.');
