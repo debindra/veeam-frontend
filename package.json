@@ -1,6 +1,12 @@
 {
   "name": "baas_frontend",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.x"
+  }
+  "engines": {
+    "npm": "6.x"
+  },
   "description": "BAAS System",
   "author": "Deb",
   "private": true,
